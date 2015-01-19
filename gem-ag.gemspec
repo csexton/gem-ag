@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "gem-ag"
-  spec.version       = "0.0.4"
+  spec.version       = "0.0.5"
   spec.authors       = ["Christopher Sexton"]
   spec.email         = ["github@codeography.com"]
   spec.summary       = %q{Search installed gems with ag}
