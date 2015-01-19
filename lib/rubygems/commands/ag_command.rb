@@ -1,5 +1,4 @@
 require 'rubygems/command'
-require 'pry'
 
 class Gem::Commands::AgCommand < Gem::Command
   def initialize
