@@ -44,8 +44,17 @@ class Gem::Commands::AgCommand < Gem::Command
   def add_ag_opts(list)
     list.each do |current_opt|
       add_option(*current_opt) do |value, options|
+        # We need to get the flag to put on the command line. We can grab that
+        # from the first `current_opt` because each definition has to start
+        # with the option name. We want to split it on space because it might
+        # designate a parameter (in the form of "--ignore PATTERN"). Ain't
+        # pretty but gets the job done.
         ag_flags << current_opt.first.split(' ').first
-        ag_flags << value unless value === true
+
+        # If `value` is `true` or `false` assume this is a option that takes a
+        # parameter and stuff that param in the array after the flag.
+        ag_flags << value unless (value === true || value === false)
+
       end
     end
   end
