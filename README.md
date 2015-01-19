@@ -26,36 +26,36 @@ And then execute:
 
 The `gem ag` command attempts to support all the same command line options as `ag` out of the box. The big difference is you cannot specify paths to search. Instead you can pass in a list of gem names.
 
-    gem ag PATTERN [GEMNAME ...] [options]
+    $ gem ag PATTERN [GEMNAME ...] [options]
 
 To see a full list of supported options run:
 
-    gem help ag
+    $ gem help ag
 
 ### Examples
 
 Search for "Hello World" in Rails and Active Record gems.
 
-    gem ag "Hello World" rails active-record
+    $ gem ag "Hello World" rails active-record
 
 Search for "def" in the rake gem, and print ag stats.
 
-    gem ag --stats "def" rake
+    $ gem ag --stats "def" rake
 
 Search in all installed gems:
 
-    gem ag "Hello World"
+    $ gem ag "Hello World"
 
 By using `bundle exec` you can search only in the gems in yoru bundle. This does require you to include it in your application's `Gemfile`.
 
 Search in all bundled gems:
 
-    bundle exec gem ag "Hello World"
+    $ bundle exec gem ag "Hello World"
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/gem-ag/fork )
+1. [Fork it](https://github.com/csexton/gem-ag/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
+3. Commit your changes (`git commit -am 'Add some feature'`), with a nice [commit message](http://stopwritingramblingcommitmessages.com/).
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
