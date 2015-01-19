@@ -1,6 +1,7 @@
 # Gem::Ag
 
-TODO: Write a gem description
+RubyGems plugin to search with [The Silver Searcher](https://github.com/ggreer/the_silver_searcher)
+
 
 ## Installation
 
@@ -20,7 +21,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The `gem ag` command attempts to support all the same command line options as `ag` out of the box. The big difference is you cannot specify paths to search. Instead you can pass in a list of gem names.
+
+```
+Usage: gem ag PATTERN [GEMNAME ...] [options]
+```
+
+### Examples
+
+Search for "Hello World" in Rails and Active Record gems.
+
+```
+gem ag "Hello World" rails active-record
+```
+
+Search for "def" in the rake gem, and print ag stats.
+
+```
+gem ag --stats "def" rake
+````
+
+Search in all installed gems:
+
+```
+gem ag "Hello World"
+```
+
+By using `bundle exec` you can search only in the gems in yoru bundle.
+
+Search in all bundled gems:
+
+```
+bundle exec gem ag "Hello World"
+```
 
 ## Contributing
 

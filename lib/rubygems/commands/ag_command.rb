@@ -1,4 +1,5 @@
 require 'rubygems/command'
+require 'pry'
 
 class Gem::Commands::AgCommand < Gem::Command
   def initialize
@@ -17,8 +18,9 @@ class Gem::Commands::AgCommand < Gem::Command
 
   def execute
     search_term, gems_to_search = options[:args]
-    paths = search_paths(gems_to_search).join ' '
-    flags = ag_flags.join ' '
+    gems_to_search = Array(gems_to_search).compact
+    paths = search_paths(gems_to_search)
+    flags = ag_flags
 
     execute_ag flags, search_term, paths
   end
@@ -29,15 +31,15 @@ class Gem::Commands::AgCommand < Gem::Command
     @ag_flags ||= Array.new
   end
 
-  def search_paths(*gems_to_search)
-    specs = if gems_to_search
-      Gem::Specification.find_all
-    else
-      Array(gems_to_search).map do |name|
-        Gem::Specification.find_all_by_name name
-      end.flatten
-    end
-    specs.map{|s| "\"#{s.full_gem_path}\""}
+  def search_paths(gems_to_search)
+    specs = if gems_to_search.empty?
+              Gem::Specification.find_all
+            else
+              Array(gems_to_search).map do |name|
+                Gem::Specification.find_all_by_name name
+              end.flatten
+            end
+    specs.map(&:full_require_paths).flatten
   end
 
   def add_ag_opts(list)
@@ -49,8 +51,12 @@ class Gem::Commands::AgCommand < Gem::Command
     end
   end
 
+  def quote(list)
+    list.map{|item| "\"#{item}\""}.join ' '
+  end
+
   def execute_ag(flags, search_term, paths)
-    exec "ag #{flags} #{search_term} #{paths}"
+    exec "ag #{flags.join ' '} #{search_term} #{quote paths}"
   end
 
   # Holy hell this is a big list of things. Taken from the ag man page. If
