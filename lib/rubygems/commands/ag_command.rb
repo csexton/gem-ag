@@ -94,7 +94,7 @@ class Gem::Commands::AgCommand < Gem::Command
       ["-g PATTERN",                          "Print filenames matching PATTERN."],
       ["-G", "--file-search-regex PATTERN",   "Only search files whose names match PATTERN."],
       ["-H", "--heading",                     "Print filenames above matching contents."],
-      ["-H", "--noheading",                   "Don't print filenames above matching contents."],
+      ["--noheading",                         "Don't print filenames above matching contents."],
       ["--hidden",                            "Search hidden files. This option obeys ignore files."],
       ["--ignore PATTERN",                    "Ignore files/directories whose names match this pattern. Literal file and directory names are also allowed."],
       ["--ignore-dir NAME",                   "Alias for --ignore for compatibility with ack."],
